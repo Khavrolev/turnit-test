@@ -1,4 +1,13 @@
+import { CellProps, ColumnInstance } from "react-table";
+
 export type ObjectValues<T> = T[keyof T];
+
+export interface CellCustomProps<T extends object, K = unknown>
+  extends CellProps<T, K> {
+  column: ColumnInstance<T> & {
+    prettify?: boolean;
+  };
+}
 
 export const ITEM_TYPE = {
   AGENT_TOOL: "AGENT_TOOL",

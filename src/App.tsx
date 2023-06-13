@@ -24,42 +24,42 @@ function App() {
       {
         Header: "Name",
         accessor: "name",
-        Cell: (cell) => <TableCellWrapper {...cell} />,
       },
       {
         Header: "Type",
         accessor: "type",
-        Cell: (cell) => <TableCellWrapper {...cell} prettify />,
+        prettify: true,
       },
       {
         Header: "Type of tool",
         accessor: "toolType",
-        Cell: (cell) => <TableCellWrapper {...cell} prettify />,
+        prettify: true,
       },
       {
         Header: "External reference",
         accessor: "externalReference",
-        Cell: (cell) => <TableCellWrapper {...cell} />,
       },
       {
         Header: "Active",
         accessor: "active",
-        Cell: (cell) => <TableCellWrapper {...cell} />,
       },
     ],
     []
   );
 
+  const table = useTable<TableData>(
+    {
+      columns: columnsTable,
+      data,
+      defaultColumn: { Cell: TableCellWrapper },
+    },
+    useRowSelect,
+    useToggleAllRowsSelected,
+    useRowsEditAction
+  );
+
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable<TableData>(
-      {
-        columns: columnsTable,
-        data,
-      },
-      useRowSelect,
-      useToggleAllRowsSelected,
-      useRowsEditAction
-    );
+    table;
 
   return (
     <Stack spacing={2}>
@@ -89,7 +89,13 @@ function App() {
               >
                 {row.cells.map((cell) => {
                   return (
-                    <TableCell {...cell.getCellProps()}>
+                    <TableCell
+                      {...cell.getCellProps({
+                        style: {
+                          width: cell.column.width,
+                        },
+                      })}
+                    >
                       {cell.render("Cell")}
                     </TableCell>
                   );
