@@ -19,9 +19,9 @@ export const TOOL_TYPE = {
 export type ToolType = ObjectValues<typeof TOOL_TYPE>;
 
 export interface TableData {
-  name: string;
-  type: ItemType;
+  name?: string;
+  type?: ItemType;
   toolType?: ToolType;
-  externalReference: string;
-  active: boolean;
+  externalReference?: string;
+  active?: boolean;
 }
