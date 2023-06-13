@@ -14,7 +14,8 @@ import {
   TableRow,
 } from "@mui/material";
 import { color } from "./const/colors";
-import TableEditActions from "./components/TableEditActions";
+import TableEditActionsCell from "./components/TableEditActionsCell";
+import TableActiveCell from "./components/TableActiveCell";
 
 function App() {
   const [data, setData] = useState(initTableData);
@@ -34,12 +35,16 @@ function App() {
         Cell: ({ cell }) => getPrettyValue(cell.value),
       },
       { Header: "External reference", accessor: "externalReference" },
-      { Header: "Active", accessor: "active" },
+      {
+        Header: "Active",
+        accessor: "active",
+        Cell: ({ cell }) => <TableActiveCell active={!!cell.value} />,
+      },
       {
         id: "action",
-        Cell: (cell) => (
-          <TableEditActions
-            {...cell}
+        Cell: ({ row }) => (
+          <TableEditActionsCell
+            rowId={row.id}
             editableRows={editableRows}
             changeEditableRows={setEditableRows}
           />
