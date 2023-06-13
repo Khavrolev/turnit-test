@@ -12,9 +12,9 @@ import {
   TableRow,
 } from "@mui/material";
 import { color } from "./const/colors";
-import TableEditActionsCell from "./components/TableEditActionsCell";
 import TableCellWrapper from "./components/TableCellWrapper";
 import { AppContext } from "./context/AppContext";
+import useRowsEditAction from "./hooks/useRowsEditAction";
 
 function App() {
   const { data, setData, editableRows } = useContext(AppContext);
@@ -33,16 +33,6 @@ function App() {
         // Cell: ({ cell }) => getPrettyValue(cell.value),
       },
       { Header: "External reference", accessor: "externalReference" },
-      {
-        Header: "Active",
-        accessor: "active",
-        // Cell: ({ cell }) => <TableActiveCell active={!!cell.value} />,
-      },
-      {
-        id: "action",
-        Cell: TableEditActionsCell,
-        disableSortBy: true,
-      },
     ],
     []
   );
@@ -57,7 +47,8 @@ function App() {
         },
       },
       useRowSelect,
-      useToggleAllRowsSelected
+      useToggleAllRowsSelected,
+      useRowsEditAction
     );
 
   return (
