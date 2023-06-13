@@ -1,4 +1,4 @@
-import { Column, useTable } from "react-table";
+import { Column, useRowSelect, useTable } from "react-table";
 import { initTableData } from "../const/init";
 import {
   Button,
@@ -13,14 +13,13 @@ import { color } from "../const/colors";
 import { TableData } from "../types/types";
 import { getPrettyValue } from "../utils/utils";
 import { useMemo, useState } from "react";
-import { CheckBox } from "@mui/icons-material";
+import useToggleAllRowsSelected from "../hooks/useToggleAllRowsSelected";
 
 function MaterialTable() {
   const [data, setData] = useState(initTableData);
 
   const columnsTable: Column<TableData>[] = useMemo(
     () => [
-      { Header: <CheckBox />, id: "checkbox", Cell: () => <CheckBox /> },
       { Header: "Name", accessor: "name" },
       {
         Header: "Type",
@@ -38,10 +37,15 @@ function MaterialTable() {
     []
   );
 
-  const { getTableProps, headerGroups, rows, prepareRow } = useTable({
-    columns: columnsTable,
-    data,
-  });
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable(
+      {
+        columns: columnsTable,
+        data,
+      },
+      useRowSelect,
+      useToggleAllRowsSelected
+    );
 
   return (
     <Stack spacing={2}>
@@ -57,7 +61,7 @@ function MaterialTable() {
             </TableRow>
           ))}
         </TableHead>
-        <TableBody>
+        <TableBody {...getTableBodyProps()}>
           {rows.map((row) => {
             prepareRow(row);
             return (
