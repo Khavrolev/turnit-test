@@ -7,6 +7,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
+import { color } from "../const/colors";
 
 function MaterialTable() {
   const { getTableProps, headerGroups, rows, prepareRow } = useTable({
@@ -16,7 +17,7 @@ function MaterialTable() {
 
   return (
     <Table {...getTableProps()}>
-      <TableHead>
+      <TableHead sx={{ backgroundColor: color.header }}>
         {headerGroups.map((headerGroup) => (
           <TableRow {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
