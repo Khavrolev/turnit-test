@@ -1,8 +1,6 @@
-import { useMemo, useState } from "react";
-import { initTableData } from "./const/init";
+import { useContext, useMemo } from "react";
 import { TableData } from "./types/types";
 import { Column, useRowSelect, useTable } from "react-table";
-import { getPrettyValue } from "./utils/utils";
 import useToggleAllRowsSelected from "./hooks/useToggleAllRowsSelected";
 import { Stack } from "@mui/system";
 import {
@@ -15,11 +13,11 @@ import {
 } from "@mui/material";
 import { color } from "./const/colors";
 import TableEditActionsCell from "./components/TableEditActionsCell";
-import TableActiveCell from "./components/TableActiveCell";
+import TableCellWrapper from "./components/TableCellWrapper";
+import { AppContext } from "./context/AppContext";
 
 function App() {
-  const [data, setData] = useState(initTableData);
-  const [editableRows, setEditableRows] = useState<Record<string, boolean>>({});
+  const { data, setData, editableRows } = useContext(AppContext);
 
   const columnsTable: Column<TableData>[] = useMemo(
     () => [
@@ -27,39 +25,36 @@ function App() {
       {
         Header: "Type",
         accessor: "type",
-        Cell: ({ cell }) => getPrettyValue(cell.value),
+        // Cell: ({ cell }) => getPrettyValue(cell.value),
       },
       {
         Header: "Type of tool",
         accessor: "toolType",
-        Cell: ({ cell }) => getPrettyValue(cell.value),
+        // Cell: ({ cell }) => getPrettyValue(cell.value),
       },
       { Header: "External reference", accessor: "externalReference" },
       {
         Header: "Active",
         accessor: "active",
-        Cell: ({ cell }) => <TableActiveCell active={!!cell.value} />,
+        // Cell: ({ cell }) => <TableActiveCell active={!!cell.value} />,
       },
       {
         id: "action",
-        Cell: ({ row }) => (
-          <TableEditActionsCell
-            rowId={row.id}
-            editableRows={editableRows}
-            changeEditableRows={setEditableRows}
-          />
-        ),
+        Cell: TableEditActionsCell,
         disableSortBy: true,
       },
     ],
-    [editableRows]
+    []
   );
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable(
+    useTable<TableData>(
       {
         columns: columnsTable,
         data,
+        defaultColumn: {
+          Cell: TableCellWrapper,
+        },
       },
       useRowSelect,
       useToggleAllRowsSelected
@@ -83,7 +78,14 @@ function App() {
           {rows.map((row) => {
             prepareRow(row);
             return (
-              <TableRow {...row.getRowProps()}>
+              <TableRow
+                {...row.getRowProps()}
+                sx={{
+                  backgroundColor: editableRows[row.id]
+                    ? color.selected
+                    : "transparent",
+                }}
+              >
                 {row.cells.map((cell) => {
                   return (
                     <TableCell {...cell.getCellProps()}>

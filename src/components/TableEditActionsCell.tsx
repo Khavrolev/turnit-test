@@ -3,20 +3,16 @@ import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
 import { IconButton } from "@mui/material";
+import { AppContext } from "../context/AppContext";
+import { useContext } from "react";
+import { CellProps } from "react-table";
 
-interface Props {
-  rowId: string;
-  editableRows: Record<string, boolean>;
-  changeEditableRows: (value: Record<string, boolean>) => void;
-}
+function TableEditActionsCell<T extends object>(cell: CellProps<T>) {
+  const rowId = cell.row.id;
+  const { editableRows, setEditableRows } = useContext(AppContext);
 
-function TableEditActionsCell({
-  rowId,
-  editableRows,
-  changeEditableRows,
-}: Props) {
   function changeEditableRowsStatus(editable: boolean) {
-    changeEditableRows({ ...editableRows, [rowId]: editable });
+    setEditableRows({ ...editableRows, [rowId]: editable });
   }
 
   if (editableRows[rowId]) {
