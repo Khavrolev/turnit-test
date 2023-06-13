@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["react-table-config.d.ts", "src"],
+  "include": ["*.d.ts", "src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
