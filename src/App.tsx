@@ -1,5 +1,7 @@
+import MaterialTable from "./components/MaterialTable";
+
 function App() {
-  return <div>Hello world!</div>;
+  return <MaterialTable />;
 }
 
 export default App;
