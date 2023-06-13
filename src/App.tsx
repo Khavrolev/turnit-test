@@ -21,18 +21,31 @@ function App() {
 
   const columnsTable: Column<TableData>[] = useMemo(
     () => [
-      { Header: "Name", accessor: "name" },
+      {
+        Header: "Name",
+        accessor: "name",
+        Cell: (cell) => <TableCellWrapper {...cell} />,
+      },
       {
         Header: "Type",
         accessor: "type",
-        // Cell: ({ cell }) => getPrettyValue(cell.value),
+        Cell: (cell) => <TableCellWrapper {...cell} prettify />,
       },
       {
         Header: "Type of tool",
         accessor: "toolType",
-        // Cell: ({ cell }) => getPrettyValue(cell.value),
+        Cell: (cell) => <TableCellWrapper {...cell} prettify />,
       },
-      { Header: "External reference", accessor: "externalReference" },
+      {
+        Header: "External reference",
+        accessor: "externalReference",
+        Cell: (cell) => <TableCellWrapper {...cell} />,
+      },
+      {
+        Header: "Active",
+        accessor: "active",
+        Cell: (cell) => <TableCellWrapper {...cell} />,
+      },
     ],
     []
   );
@@ -42,9 +55,6 @@ function App() {
       {
         columns: columnsTable,
         data,
-        defaultColumn: {
-          Cell: TableCellWrapper,
-        },
       },
       useRowSelect,
       useToggleAllRowsSelected,

@@ -7,7 +7,6 @@ function useRowsEditAction<T extends object>(hooks: Hooks<T>) {
     {
       id: "action",
       Cell: TableEditActionsCell,
-      disableSortBy: true,
     },
   ]);
 }

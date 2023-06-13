@@ -18,6 +18,15 @@ export const TOOL_TYPE = {
 
 export type ToolType = ObjectValues<typeof TOOL_TYPE>;
 
+export const FIELD_TYPE = {
+  TEXT: "TEXT",
+  DROPDOWN: "DROPDOWN",
+  MULTISELECT: "MULTISELECT",
+  CHECKBOX: "CHECKBOX",
+} as const;
+
+export type FieldType = ObjectValues<typeof FIELD_TYPE>;
+
 export interface TableData {
   name?: string;
   type?: ItemType;
