@@ -95,7 +95,12 @@ function App() {
               </TableBody>
             </Table>
             <Button
-              onClick={() => changeData([...data, newTableData])}
+              onClick={() =>
+                changeData([
+                  ...data,
+                  { ...newTableData, id: "id" + Date.now() },
+                ])
+              }
               disabled={!!editableRow}
             >
               Add Row

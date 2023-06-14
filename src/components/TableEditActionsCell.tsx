@@ -9,7 +9,7 @@ import { CellProps } from "react-table";
 import { useForm } from "react-final-form";
 import { TableType } from "../types/types";
 
-function TableEditActionsCell<T extends object>(cell: CellProps<T>) {
+function TableEditActionsCell<T extends { id: string }>(cell: CellProps<T>) {
   const { id: rowId } = cell.row;
   const { editableRow, changeEditableRow } = useContext(AppContext);
 
@@ -18,6 +18,11 @@ function TableEditActionsCell<T extends object>(cell: CellProps<T>) {
   function handleResetChanges() {
     reset();
     changeEditableRow(undefined);
+  }
+
+  function handleEditRow() {
+    reset();
+    changeEditableRow(rowId);
   }
 
   if (editableRow === rowId) {
@@ -34,7 +39,7 @@ function TableEditActionsCell<T extends object>(cell: CellProps<T>) {
   }
 
   return (
-    <IconButton onClick={() => changeEditableRow(rowId)}>
+    <IconButton onClick={handleEditRow}>
       <EditIcon />
     </IconButton>
   );

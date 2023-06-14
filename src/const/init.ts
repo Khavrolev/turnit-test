@@ -7,7 +7,7 @@ import {
 } from "../types/types";
 import { getPrettyOptions } from "../utils/utils";
 
-export const initialValuesPrefix = "initialValues";
+export const initialValuesPrefix = "values";
 
 export const columnsTable: CustomColumn<TableData>[] = [
   {
@@ -75,8 +75,7 @@ export const initTableData: TableData[] = [
   },
 ];
 
-export const newTableData: TableData = {
-  id: "id" + new Date().getTime(),
+export const newTableData: Omit<TableData, "id"> = {
   type: ITEM_TYPE.UNKNOWN,
   toolType: [],
   active: false,
