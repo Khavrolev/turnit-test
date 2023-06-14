@@ -2,9 +2,12 @@ import { CellProps, Column, ColumnInstance } from "react-table";
 
 export type ObjectValues<T> = T[keyof T];
 
+export type SelectOption = { value: string | number; label: string };
+
 export type CustomColumnInstance = {
   prettify?: boolean;
   editType?: FieldType;
+  options?: SelectOption[];
 };
 
 export type CustomColumn<T extends object> = Column<T> & CustomColumnInstance;
@@ -43,7 +46,7 @@ export type FieldType = ObjectValues<typeof FIELD_TYPE>;
 export type TableData = {
   name?: string;
   type?: ItemType;
-  toolType?: ToolType;
+  toolType?: ToolType[];
   externalReference?: string;
   active?: boolean;
 };

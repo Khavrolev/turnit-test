@@ -1,5 +1,11 @@
 import { useContext, useMemo } from "react";
-import { CustomColumn, FIELD_TYPE, TableData } from "./types/types";
+import {
+  CustomColumn,
+  FIELD_TYPE,
+  ITEM_TYPE,
+  TOOL_TYPE,
+  TableData,
+} from "./types/types";
 import { useRowSelect, useTable } from "react-table";
 import useToggleAllRowsSelected from "./hooks/useToggleAllRowsSelected";
 import { Stack } from "@mui/system";
@@ -12,9 +18,10 @@ import {
   TableRow,
 } from "@mui/material";
 import { color } from "./const/colors";
-import TableCellWrapper from "./components/TableCellWrapper";
+import TableCellWrapper from "./components/wrapper/TableCellWrapper";
 import { AppContext } from "./context/AppContext";
 import useRowsEditAction from "./hooks/useRowsEditAction";
+import { getPrettyOptions } from "./utils/utils";
 
 function App() {
   const { data, setData, editableRows } = useContext(AppContext);
@@ -31,12 +38,14 @@ function App() {
         accessor: "type",
         prettify: true,
         editType: FIELD_TYPE.DROPDOWN,
+        options: getPrettyOptions(ITEM_TYPE),
       },
       {
         Header: "Type of tool",
         accessor: "toolType",
         prettify: true,
         editType: FIELD_TYPE.MULTISELECT,
+        options: getPrettyOptions(TOOL_TYPE),
       },
       {
         Header: "External reference",

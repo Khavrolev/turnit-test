@@ -4,7 +4,7 @@ export const initTableData: TableData[] = [
   {
     name: "Agent Portal",
     type: ITEM_TYPE.AGENT_TOOL,
-    toolType: TOOL_TYPE.LINKON_LINE,
+    toolType: [TOOL_TYPE.LINKON_LINE],
     externalReference: "QA52562",
     active: true,
   },
