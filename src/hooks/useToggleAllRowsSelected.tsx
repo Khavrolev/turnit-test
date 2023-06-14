@@ -11,6 +11,7 @@ function useToggleAllRowsSelected<T extends object>(hooks: Hooks<T>) {
       Cell: ({ row }: CellProps<T>) => (
         <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
       ),
+      width: 40,
     },
     ...columns,
   ]);

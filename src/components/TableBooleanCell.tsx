@@ -6,11 +6,13 @@ interface Props {
 }
 
 function TableBooleanCell({ active }: Props) {
+  const iconProps = { sx: { width: "100%" } };
+
   if (active) {
-    return <CheckIcon color="success" />;
+    return <CheckIcon color="success" {...iconProps} />;
   }
 
-  return <ClearIcon color="error" />;
+  return <ClearIcon color="error" {...iconProps} />;
 }
 
 export default TableBooleanCell;

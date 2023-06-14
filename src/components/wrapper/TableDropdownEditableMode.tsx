@@ -13,7 +13,7 @@ function TableDropdownEditableMode<T = unknown>({
   multiple,
 }: Props<T>) {
   return (
-    <Select defaultValue={value} multiple={multiple}>
+    <Select defaultValue={value} multiple={multiple} sx={{ width: "100%" }}>
       {options.map(({ value, label }) => (
         <MenuItem key={value} value={value}>
           {label}

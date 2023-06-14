@@ -7,7 +7,7 @@ function useRowsEditAction<T extends object>(hooks: Hooks<T>) {
     {
       id: "action",
       Cell: TableEditActionsCell,
-      width: 60,
+      width: 40,
     },
   ]);
 }
