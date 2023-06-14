@@ -4,7 +4,7 @@ import { IndeterminateCheckbox } from "../components/IndeterminateCheckbox";
 function useToggleAllRowsSelected<T extends object>(hooks: Hooks<T>) {
   return hooks.visibleColumns.push((columns) => [
     {
-      id: "select",
+      id: "selection",
       Header: ({ getToggleAllRowsSelectedProps }) => (
         <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
       ),
