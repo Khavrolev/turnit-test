@@ -3,7 +3,7 @@ import { initialValuesPrefix } from "../const/init";
 
 export type ObjectValues<T> = T[keyof T];
 
-export type SelectOption = { value: string | number; label: string };
+export type SelectOption = { value: string; label: string };
 
 export type CustomColumnInstance = {
   prettify?: boolean;
