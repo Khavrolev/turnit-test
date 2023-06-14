@@ -15,14 +15,9 @@ function TableEditActionsCell<T extends object>(cell: CellProps<T>) {
 
   const { reset } = useForm<TableType>();
 
-  function handleResetChanges() {
+  function handleEditableModeChange(id: string | undefined) {
     reset();
-    changeEditableRow(undefined);
-  }
-
-  function handleEditRow() {
-    reset();
-    changeEditableRow(rowId);
+    changeEditableRow(id);
   }
 
   if (editableRow === rowId) {
@@ -31,7 +26,7 @@ function TableEditActionsCell<T extends object>(cell: CellProps<T>) {
         <IconButton type="submit">
           <CheckIcon />
         </IconButton>
-        <IconButton onClick={handleResetChanges}>
+        <IconButton onClick={() => handleEditableModeChange(undefined)}>
           <ClearIcon />
         </IconButton>
       </Stack>
@@ -39,7 +34,7 @@ function TableEditActionsCell<T extends object>(cell: CellProps<T>) {
   }
 
   return (
-    <IconButton onClick={handleEditRow}>
+    <IconButton onClick={() => handleEditableModeChange(rowId)}>
       <EditIcon />
     </IconButton>
   );
