@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "@mui/material";
 import { color } from "./const/colors";
-import TableCustomCell from "./components/custom-cell/TableCustomCell";
+import TableCustomCell from "./components/TableCustomCell";
 import { AppContext } from "./context/AppContext";
 import useRowsEditAction from "./hooks/useRowsEditAction";
 import { Form } from "react-final-form";

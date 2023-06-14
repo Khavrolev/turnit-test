@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { AppContext } from "../../context/AppContext";
-import { getPrettyValue } from "../../utils/utils";
-import { CellCustomProps } from "../../types/types";
-import TableBooleanCell from "../TableBooleanCell";
-import { isBoolean, isDefined, isString } from "../../utils/typeguards";
-import TableCustomCellEditableMode from "./TableCustomCellEditableMode";
-import { initialValuesPrefix } from "../../const/init";
+import { AppContext } from "../context/AppContext";
+import { getPrettyValue } from "../utils/utils";
+import { CellCustomProps } from "../types/types";
+import TableBooleanCell from "./TableBooleanCell";
+import { isBoolean, isDefined, isString } from "../utils/typeguards";
+import TableCustomCellEditableMode from "./editable-mode/TableCustomCellEditableMode";
+import { initialValuesPrefix } from "../const/init";
 
 function TableCustomCell<T extends object, K = unknown>(
   cell: CellCustomProps<T, K>
