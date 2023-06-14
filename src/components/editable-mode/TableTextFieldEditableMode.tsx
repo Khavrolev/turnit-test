@@ -10,7 +10,12 @@ function TableTextFieldEditableMode({ name }: Props) {
     <Field
       name={name}
       component={({ input, ...rest }) => (
-        <TextField {...input} {...rest} onChange={input.onChange} />
+        <TextField
+          {...input}
+          {...rest}
+          size="small"
+          onChange={input.onChange}
+        />
       )}
     />
   );

@@ -18,6 +18,7 @@ function TableDropdownEditableMode({ name, options = [], multiple }: Props) {
           {...input}
           {...rest}
           multiple={multiple}
+          size="small"
           sx={{ width: "100%" }}
           onChange={input.onChange}
         >

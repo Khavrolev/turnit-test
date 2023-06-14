@@ -6,6 +6,7 @@ import TableBooleanCell from "./TableBooleanCell";
 import { isBoolean, isDefined, isString } from "../utils/typeguards";
 import TableCustomCellEditableMode from "./editable-mode/TableCustomCellEditableMode";
 import { initialValuesPrefix } from "../const/init";
+import { Typography } from "@mui/material";
 
 function TableCustomCell<T extends object, K = unknown>(
   cell: CellCustomProps<T, K>
@@ -17,6 +18,26 @@ function TableCustomCell<T extends object, K = unknown>(
   const value = cell.cell.value;
   const { prettify, editType, options, id: columnId } = cell.column;
 
+  function getContent(value: unknown) {
+    if (!isDefined(value) || (Array.isArray(value) && !value.length)) {
+      return "-";
+    }
+
+    if (isString(value)) {
+      return prettify ? getPrettyValue(value) : value;
+    }
+
+    if (Array.isArray(value)) {
+      return value
+        .map((item) =>
+          isString(item) && prettify ? getPrettyValue(item) : item
+        )
+        .join(", ");
+    }
+
+    return null;
+  }
+
   if (editable) {
     return (
       <TableCustomCellEditableMode
@@ -27,25 +48,11 @@ function TableCustomCell<T extends object, K = unknown>(
     );
   }
 
-  if (!isDefined(value) || (Array.isArray(value) && !value.length)) {
-    return "-";
-  }
-
-  if (isString(value)) {
-    return prettify ? getPrettyValue(value) : value;
-  }
-
-  if (Array.isArray(value)) {
-    return value
-      .map((item) => (isString(item) && prettify ? getPrettyValue(item) : item))
-      .join(", ");
-  }
-
   if (isBoolean(value)) {
     return <TableBooleanCell active={value} />;
   }
 
-  return value;
+  return <Typography>{getContent(value)}</Typography>;
 }
 
 export default TableCustomCell;

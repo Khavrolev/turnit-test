@@ -11,7 +11,7 @@ function TableCheckboxEditableMode({ name }: Props) {
       name={name}
       type="checkbox"
       component={({ input, ...rest }) => (
-        <Checkbox {...input} {...rest} onChange={input.onChange} />
+        <Checkbox {...input} {...rest} size="small" onChange={input.onChange} />
       )}
     />
   );
