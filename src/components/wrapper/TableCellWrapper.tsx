@@ -32,6 +32,12 @@ function TableCellWrapper<T extends object, K = unknown>(
     return prettify ? getPrettyValue(value) : value;
   }
 
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => (isString(item) && prettify ? getPrettyValue(item) : item))
+      .join(", ");
+  }
+
   if (isBoolean(value)) {
     return <TableBooleanCell active={value} />;
   }
