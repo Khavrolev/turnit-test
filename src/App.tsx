@@ -45,7 +45,6 @@ function App() {
     <Form<TableType>
       onSubmit={handleSubmitForm}
       initialValues={{ [initialValuesPrefix]: data }}
-      validateOnBlur={false}
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <Stack spacing={2}>
