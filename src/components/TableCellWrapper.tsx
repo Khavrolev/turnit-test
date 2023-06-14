@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { getPrettyValue } from "../utils/utils";
 import { CellCustomProps } from "../types/types";
-import TableActiveCell from "./TableActiveCell";
+import TableBooleanCell from "./TableBooleanCell";
 import { isBoolean, isDefined, isString } from "../utils/typeguards";
 
 function TableCellWrapper<T extends object, K = unknown>(
@@ -26,7 +26,7 @@ function TableCellWrapper<T extends object, K = unknown>(
   }
 
   if (isBoolean(value)) {
-    return <TableActiveCell active={value} />;
+    return <TableBooleanCell active={value} />;
   }
 
   return value;

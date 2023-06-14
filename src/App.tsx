@@ -1,6 +1,6 @@
 import { useContext, useMemo } from "react";
-import { TableData } from "./types/types";
-import { Column, useRowSelect, useTable } from "react-table";
+import { CustomColumn, FIELD_TYPE, TableData } from "./types/types";
+import { useRowSelect, useTable } from "react-table";
 import useToggleAllRowsSelected from "./hooks/useToggleAllRowsSelected";
 import { Stack } from "@mui/system";
 import {
@@ -19,29 +19,34 @@ import useRowsEditAction from "./hooks/useRowsEditAction";
 function App() {
   const { data, setData, editableRows } = useContext(AppContext);
 
-  const columnsTable: Column<TableData>[] = useMemo(
+  const columnsTable: CustomColumn<TableData>[] = useMemo(
     () => [
       {
         Header: "Name",
         accessor: "name",
+        editType: FIELD_TYPE.TEXT,
       },
       {
         Header: "Type",
         accessor: "type",
         prettify: true,
+        editType: FIELD_TYPE.DROPDOWN,
       },
       {
         Header: "Type of tool",
         accessor: "toolType",
         prettify: true,
+        editType: FIELD_TYPE.MULTISELECT,
       },
       {
         Header: "External reference",
         accessor: "externalReference",
+        editType: FIELD_TYPE.TEXT,
       },
       {
         Header: "Active",
         accessor: "active",
+        editType: FIELD_TYPE.CHECKBOX,
       },
     ],
     []

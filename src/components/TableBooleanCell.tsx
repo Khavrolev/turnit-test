@@ -5,7 +5,7 @@ interface Props {
   active: boolean;
 }
 
-function TableActiveCell({ active }: Props) {
+function TableBooleanCell({ active }: Props) {
   if (active) {
     return <CheckIcon color="success" />;
   }
@@ -13,4 +13,4 @@ function TableActiveCell({ active }: Props) {
   return <ClearIcon color="error" />;
 }
 
-export default TableActiveCell;
+export default TableBooleanCell;
