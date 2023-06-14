@@ -6,22 +6,27 @@ import { IconButton } from "@mui/material";
 import { AppContext } from "../context/AppContext";
 import { useContext } from "react";
 import { CellProps } from "react-table";
+import { useForm } from "react-final-form";
+import { TableType } from "../types/types";
 
 function TableEditActionsCell<T extends object>(cell: CellProps<T>) {
-  const rowId = cell.row.id;
-  const { editableRows, setEditableRows } = useContext(AppContext);
+  const { id: rowId } = cell.row;
+  const { editableRow, changeEditableRow } = useContext(AppContext);
 
-  function changeEditableRowsStatus(editable: boolean) {
-    setEditableRows({ ...editableRows, [rowId]: editable });
+  const { reset } = useForm<TableType>();
+
+  function handleResetChanges() {
+    reset();
+    changeEditableRow(undefined);
   }
 
-  if (editableRows[rowId]) {
+  if (editableRow === rowId) {
     return (
       <Stack sx={{ display: "inline-flex" }}>
-        <IconButton onClick={() => changeEditableRowsStatus(false)}>
+        <IconButton type="submit">
           <CheckIcon />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={handleResetChanges}>
           <ClearIcon />
         </IconButton>
       </Stack>
@@ -29,7 +34,7 @@ function TableEditActionsCell<T extends object>(cell: CellProps<T>) {
   }
 
   return (
-    <IconButton onClick={() => changeEditableRowsStatus(true)}>
+    <IconButton onClick={() => changeEditableRow(rowId)}>
       <EditIcon />
     </IconButton>
   );

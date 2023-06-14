@@ -1,4 +1,5 @@
 import { CellProps, Column, ColumnInstance } from "react-table";
+import { initialValuesPrefix } from "../const/init";
 
 export type ObjectValues<T> = T[keyof T];
 
@@ -44,9 +45,14 @@ export const FIELD_TYPE = {
 export type FieldType = ObjectValues<typeof FIELD_TYPE>;
 
 export type TableData = {
+  id: string;
   name?: string;
-  type?: ItemType;
-  toolType?: ToolType[];
+  type: ItemType;
+  toolType: ToolType[];
   externalReference?: string;
-  active?: boolean;
+  active: boolean;
+};
+
+export type TableType = {
+  [initialValuesPrefix]: TableData[];
 };

@@ -4,27 +4,30 @@ import { getPrettyValue } from "../../utils/utils";
 import { CellCustomProps } from "../../types/types";
 import TableBooleanCell from "../TableBooleanCell";
 import { isBoolean, isDefined, isString } from "../../utils/typeguards";
-import TableCellWrapperEditableMode from "./TableCellWrapperEditableMode";
+import TableCustomCellEditableMode from "./TableCustomCellEditableMode";
+import { initialValuesPrefix } from "../../const/init";
 
-function TableCellWrapper<T extends object, K = unknown>(
+function TableCustomCell<T extends object, K = unknown>(
   cell: CellCustomProps<T, K>
 ) {
-  const { editableRows } = useContext(AppContext);
-  const editable = editableRows[cell.row.id];
+  const { editableRow } = useContext(AppContext);
+
+  const rowId = cell.row.id;
+  const editable = editableRow === rowId;
   const value = cell.cell.value;
-  const { prettify, editType, options } = cell.column;
+  const { prettify, editType, options, id: columnId } = cell.column;
 
   if (editable) {
     return (
-      <TableCellWrapperEditableMode<K>
-        value={value}
+      <TableCustomCellEditableMode
+        name={`${initialValuesPrefix}.[${rowId}].${columnId}`}
         editType={editType}
         options={options}
       />
     );
   }
 
-  if (!isDefined(value)) {
+  if (!isDefined(value) || (Array.isArray(value) && !value.length)) {
     return "-";
   }
 
@@ -45,4 +48,4 @@ function TableCellWrapper<T extends object, K = unknown>(
   return value;
 }
 
-export default TableCellWrapper;
+export default TableCustomCell;
