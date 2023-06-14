@@ -9,7 +9,7 @@ import { CellProps } from "react-table";
 import { useForm } from "react-final-form";
 import { TableType } from "../types/types";
 
-function TableEditActionsCell<T extends { id: string }>(cell: CellProps<T>) {
+function TableEditActionsCell<T extends object>(cell: CellProps<T>) {
   const { id: rowId } = cell.row;
   const { editableRow, changeEditableRow } = useContext(AppContext);
 
