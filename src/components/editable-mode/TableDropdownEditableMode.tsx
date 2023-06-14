@@ -15,10 +15,10 @@ function TableDropdownEditableMode({ name, options = [], multiple }: Props) {
       name={name}
       component={({ input, ...rest }) => (
         <Select
-          multiple={multiple}
-          sx={{ width: "100%" }}
           {...input}
           {...rest}
+          multiple={multiple}
+          sx={{ width: "100%" }}
           onChange={input.onChange}
         >
           {options.map(({ value, label }) => (
