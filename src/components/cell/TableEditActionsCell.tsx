@@ -3,11 +3,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
 import { IconButton } from "@mui/material";
-import { AppContext } from "../context/AppContext";
+import { AppContext } from "../../context/AppContext";
 import { useContext } from "react";
 import { CellProps } from "react-table";
 import { useForm } from "react-final-form";
-import { TableType } from "../types/types";
+import { TableType } from "../../types/types";
 
 function TableEditActionsCell<T extends object>(cell: CellProps<T>) {
   const { id: rowId } = cell.row;

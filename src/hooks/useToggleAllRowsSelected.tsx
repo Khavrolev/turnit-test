@@ -1,5 +1,5 @@
 import { CellProps, Hooks } from "react-table";
-import { IndeterminateCheckbox } from "../components/IndeterminateCheckbox";
+import { IndeterminateCheckbox } from "../components/cell/IndeterminateCheckbox";
 
 function useToggleAllRowsSelected<T extends object>(hooks: Hooks<T>) {
   return hooks.visibleColumns.push((columns) => [

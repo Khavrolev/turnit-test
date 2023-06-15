@@ -1,4 +1,4 @@
-import { FIELD_TYPE, FieldType, SelectOption } from "../../types/types";
+import { FIELD_TYPE, FieldType, SelectOption } from "../../../types/types";
 import { memo } from "react";
 import TableTextFieldEditableMode from "./TableTextFieldEditableMode";
 import TableDropdownEditableMode from "./TableDropdownEditableMode";

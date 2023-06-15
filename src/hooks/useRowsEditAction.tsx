@@ -1,5 +1,5 @@
 import { Hooks } from "react-table";
-import TableEditActionsCell from "../components/TableEditActionsCell";
+import TableEditActionsCell from "../components/cell/TableEditActionsCell";
 
 function useRowsEditAction<T extends object>(hooks: Hooks<T>) {
   return hooks.visibleColumns.push((columns) => [

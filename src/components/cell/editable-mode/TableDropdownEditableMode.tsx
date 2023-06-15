@@ -1,6 +1,6 @@
 import { Select } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
-import { SelectOption } from "../../types/types";
+import { SelectOption } from "../../../types/types";
 import { Field } from "react-final-form";
 
 interface Props {
