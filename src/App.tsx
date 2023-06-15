@@ -1,22 +1,15 @@
 import { useContext } from "react";
 import { TableData, TableType } from "./types/types";
-import { useRowSelect, useTable } from "react-table";
-import useToggleAllRowsSelected from "./hooks/useToggleAllRowsSelected";
 import { Stack } from "@mui/system";
-import {
-  Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-} from "@mui/material";
-import { COLOR } from "./const/colors";
-import TableCustomCell from "./components/cell/TableCustomCell";
+import { Button } from "@mui/material";
 import { AppContext } from "./context/AppContext";
-import useRowsEditAction from "./hooks/useRowsEditAction";
 import { Form } from "react-final-form";
-import { tableColumns, initialValuesPrefix, newTableData } from "./const/init";
+import { initialValuesPrefix, newTableData, tableColumns } from "./const/init";
+import TableCustom from "./components/table/TableCustom";
+import { useRowSelect, useTable } from "react-table";
+import TableCustomCell from "./components/cell/TableCustomCell";
+import useToggleAllRowsSelected from "./hooks/useToggleAllRowsSelected";
+import useRowsEditAction from "./hooks/useRowsEditAction";
 
 function App() {
   const { data, setData, editableRow, setEditableRow } = useContext(AppContext);
@@ -32,9 +25,6 @@ function App() {
     useRowsEditAction
   );
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    table;
-
   function handleSubmitForm(values: TableType) {
     setData(values[initialValuesPrefix]);
     setEditableRow(undefined);
@@ -47,49 +37,7 @@ function App() {
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <Stack spacing={2}>
-            <Table {...getTableProps()}>
-              <TableHead sx={{ backgroundColor: COLOR.header }}>
-                {headerGroups.map((headerGroup) => (
-                  <TableRow {...headerGroup.getHeaderGroupProps()}>
-                    {headerGroup.headers.map((column) => (
-                      <TableCell {...column.getHeaderProps()}>
-                        {column.render("Header")}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))}
-              </TableHead>
-              <TableBody {...getTableBodyProps()}>
-                {rows.map((row) => {
-                  prepareRow(row);
-                  return (
-                    <TableRow
-                      {...row.getRowProps()}
-                      sx={{
-                        backgroundColor:
-                          editableRow === row.id ? COLOR.selected : undefined,
-                      }}
-                    >
-                      {row.cells.map((cell) => {
-                        return (
-                          <TableCell
-                            {...cell.getCellProps({
-                              style: {
-                                width: cell.column.width,
-                                minWidth: cell.column.minWidth,
-                                maxWidth: cell.column.maxWidth,
-                              },
-                            })}
-                          >
-                            {cell.render("Cell")}
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
+            <TableCustom table={table} />
             <Button
               onClick={() =>
                 setData([...data, { ...newTableData, id: "id" + Date.now() }])
