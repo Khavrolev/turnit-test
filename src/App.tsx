@@ -11,7 +11,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { color } from "./const/colors";
+import { COLOR } from "./const/colors";
 import TableCustomCell from "./components/cell/TableCustomCell";
 import { AppContext } from "./context/AppContext";
 import useRowsEditAction from "./hooks/useRowsEditAction";
@@ -48,7 +48,7 @@ function App() {
         <form onSubmit={handleSubmit}>
           <Stack spacing={2}>
             <Table {...getTableProps()}>
-              <TableHead sx={{ backgroundColor: color.header }}>
+              <TableHead sx={{ backgroundColor: COLOR.header }}>
                 {headerGroups.map((headerGroup) => (
                   <TableRow {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map((column) => (
@@ -67,9 +67,7 @@ function App() {
                       {...row.getRowProps()}
                       sx={{
                         backgroundColor:
-                          editableRow === row.id
-                            ? color.selected
-                            : "transparent",
+                          editableRow === row.id ? COLOR.selected : undefined,
                       }}
                     >
                       {row.cells.map((cell) => {
