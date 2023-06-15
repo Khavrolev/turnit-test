@@ -9,7 +9,7 @@ import { getPrettyOptions } from "../utils/utils";
 
 export const initialValuesPrefix = "values";
 
-export const columnsTable: CustomColumn<TableData>[] = [
+export const tableColumns: CustomColumn<TableData>[] = [
   {
     Header: "Name",
     accessor: "name",

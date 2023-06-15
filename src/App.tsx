@@ -16,14 +16,14 @@ import TableCustomCell from "./components/cell/TableCustomCell";
 import { AppContext } from "./context/AppContext";
 import useRowsEditAction from "./hooks/useRowsEditAction";
 import { Form } from "react-final-form";
-import { columnsTable, initialValuesPrefix, newTableData } from "./const/init";
+import { tableColumns, initialValuesPrefix, newTableData } from "./const/init";
 
 function App() {
   const { data, setData, editableRow, setEditableRow } = useContext(AppContext);
 
   const table = useTable<TableData>(
     {
-      columns: columnsTable,
+      columns: tableColumns,
       data,
       defaultColumn: { Cell: TableCustomCell },
     },
