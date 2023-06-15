@@ -11,13 +11,13 @@ import { TableType } from "../../types/types";
 
 function TableEditActionsCell<T extends object>(cell: CellProps<T>) {
   const { id: rowId } = cell.row;
-  const { editableRow, changeEditableRow } = useContext(AppContext);
+  const { editableRow, setEditableRow } = useContext(AppContext);
 
   const { reset } = useForm<TableType>();
 
   function handleEditableModeChange(id: string | undefined) {
     reset();
-    changeEditableRow(id);
+    setEditableRow(id);
   }
 
   if (editableRow === rowId) {

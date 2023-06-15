@@ -19,8 +19,7 @@ import { Form } from "react-final-form";
 import { columnsTable, initialValuesPrefix, newTableData } from "./const/init";
 
 function App() {
-  const { data, changeData, editableRow, changeEditableRow } =
-    useContext(AppContext);
+  const { data, setData, editableRow, setEditableRow } = useContext(AppContext);
 
   const table = useTable<TableData>(
     {
@@ -37,8 +36,8 @@ function App() {
     table;
 
   function handleSubmitForm(values: TableType) {
-    changeData(values[initialValuesPrefix]);
-    changeEditableRow(undefined);
+    setData(values[initialValuesPrefix]);
+    setEditableRow(undefined);
   }
 
   return (
@@ -95,10 +94,7 @@ function App() {
             </Table>
             <Button
               onClick={() =>
-                changeData([
-                  ...data,
-                  { ...newTableData, id: "id" + Date.now() },
-                ])
+                setData([...data, { ...newTableData, id: "id" + Date.now() }])
               }
               disabled={!!editableRow}
             >

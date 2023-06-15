@@ -4,9 +4,9 @@ import { TableData } from "../types/types";
 
 interface AppContextType {
   data: TableData[];
-  changeData: (value: TableData[]) => void;
+  setData: (value: TableData[]) => void;
   editableRow: string | undefined;
-  changeEditableRow: (rowId: string | undefined) => void;
+  setEditableRow: (rowId: string | undefined) => void;
 }
 
 export const AppContext = createContext({} as AppContextType);
@@ -17,9 +17,9 @@ function AppProvider({ children }: { children: ReactNode }) {
 
   const state = {
     data,
-    changeData: setData,
+    setData,
     editableRow,
-    changeEditableRow: setEditableRow,
+    setEditableRow,
   };
 
   return <AppContext.Provider value={state}>{children}</AppContext.Provider>;
